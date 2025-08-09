@@ -45,9 +45,12 @@ func (a *GoTemplAdapter) GenerateComponent(htmlTemplate string, componentConfig 
 	// Since `.Slot` in the template becomes { children... } in final GoTempl syntax
 	execData["Slot"] = "{ children... }"
 
-	// Provide each variant field with a placeholder string like `{ variant.VariantName }`
+	execData["Class"] = "{ props.Class }"                                                                 // Always include Class
+	execData["Attributes"] = "{ for key, value := range props.Attributes { \"+key+\"+\"=\"+\"value\" } }" // Placeholder for additional attributes
+
+	// Provide each variant field with a placeholder string like `{ props.VariantName }`
 	for _, variant := range componentConfig.Variants {
-		execData[capitalize(variant.Name)] = fmt.Sprintf("{ variant.%s }", capitalize(variant.Name))
+		execData[capitalize(variant.Name)] = fmt.Sprintf("{ props.%s }", capitalize(variant.Name))
 	}
 
 	// Execute the template into a buffer
@@ -64,12 +67,15 @@ func (a *GoTemplAdapter) GenerateComponent(htmlTemplate string, componentConfig 
 		structFields = append(structFields, field)
 	}
 
+	structFields = append(structFields, "\tAttributes map[string]any") // Always include Attributes
+	structFields = append(structFields, "\tClass string")              // Always include Class
+
 	packageDefinition := "package components\n\n"
 
-	structDef := fmt.Sprintf("type %sVariant struct {\n%s\n}\n\n", capitalize(componentConfig.Name), strings.Join(structFields, "\n"))
+	structDef := fmt.Sprintf("type %sProps struct {\n%s\n}\n\n", capitalize(componentConfig.Name), strings.Join(structFields, "\n"))
 
 	// Build the templ block with the executed HTML
-	templFunc := fmt.Sprintf("templ %s(variant %sVariant) {\n", capitalize(componentConfig.Name), capitalize(componentConfig.Name))
+	templFunc := fmt.Sprintf("templ %s(props %sProps) {\n", capitalize(componentConfig.Name), capitalize(componentConfig.Name))
 
 	// Indent HTML lines with a tab
 	var indentedLines []string

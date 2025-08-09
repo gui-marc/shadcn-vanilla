@@ -24,6 +24,8 @@ type GlobalConfig struct {
 	AssetsFolder     string `yaml:"assets_folder"`
 	RegistryURL      string `yaml:"registry_url"`
 	DefaultEngine    string `yaml:"default_engine"`
+	JavascriptIndex  string `yaml:"javascript_index"`
+	CSSIndex         string `yaml:"css_index"`
 }
 
 func ParseComponentConfig(yamlData []byte) (ComponentConfig, error) {

@@ -40,9 +40,8 @@ func (a *AddCmd) Run() error {
 	ghRegistry := registry.NewGitHubRegistry("gui-marc", "shadcn-vanilla", a.Branch)
 
 	basePath := filepath.Join(globalConfig.ComponentsFolder, a.Component)
-
 	// Fetch component YAML config
-	yamlPath := filepath.Join(basePath, "component.yaml")
+	yamlPath := filepath.Join(basePath, fmt.Sprintf("%s.yaml", a.Component))
 	yamlData, err := ghRegistry.FetchFile(ctx, yamlPath)
 	if err != nil {
 		return fmt.Errorf("failed to fetch component YAML: %w", err)
@@ -73,17 +72,42 @@ func (a *AddCmd) Run() error {
 	}
 
 	// Write output component file to user project folder
-	outputDir := filepath.Join(globalConfig.ComponentsFolder, a.Component, engine)
-	if err := os.MkdirAll(outputDir, 0755); err != nil {
+	if err := os.MkdirAll(globalConfig.ComponentsFolder, 0755); err != nil {
 		return err
 	}
 
 	// Save file with engine-specific extension
-	outFile := filepath.Join(outputDir, fmt.Sprintf("%s.%s", a.Component, componentAdapter.GetFileExtension()))
+	outFile := filepath.Join(globalConfig.ComponentsFolder, fmt.Sprintf("%s.%s", a.Component, componentAdapter.GetFileExtension()))
 	if err := os.WriteFile(outFile, []byte(generated), 0644); err != nil {
 		return err
 	}
 
+	// Get component CSS and JS
+	cssPath := filepath.Join(basePath, fmt.Sprintf("%s.css", a.Component))
+	cssData, err := ghRegistry.FetchFile(ctx, cssPath)
+	if err == nil {
+		// Save css file in assets if exists
+		cssFile := filepath.Join(globalConfig.AssetsFolder, fmt.Sprintf("%s.%s", a.Component, "css"))
+		if err := os.WriteFile(cssFile, []byte(cssData), 0644); err != nil {
+			return err
+		}
+
+		fmt.Printf("CSS file saved to %s\n", cssFile)
+	}
+
+	jsPath := filepath.Join(basePath, fmt.Sprintf("%s.js", a.Component))
+	jsData, err := ghRegistry.FetchFile(ctx, jsPath)
+	if err == nil {
+		// Save js file in assets if exists
+		jsFile := filepath.Join(globalConfig.AssetsFolder, fmt.Sprintf("%s.%s", a.Component, "js"))
+		if err := os.WriteFile(jsFile, []byte(jsData), 0644); err != nil {
+			return err
+		}
+
+		fmt.Printf("JS file saved to %s\n", jsFile)
+	}
+
 	fmt.Printf("Component %s added successfully to %s\n", a.Component, outFile)
+
 	return nil
 }
