@@ -11,6 +11,9 @@ permissions:
 jobs:
   goreleaser:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: cli
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -28,6 +31,5 @@ jobs:
           distribution: goreleaser
           version: '~> v1'
           args: release --clean
-          working-directory: cli
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
