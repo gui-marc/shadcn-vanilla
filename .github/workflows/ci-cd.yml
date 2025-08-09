@@ -56,7 +56,7 @@ jobs:
           go-version: '1.24.6'
 
       - name: Build CLI binary
-        run: go build -o shadcn-vanilla ./cli
+        run: go build -o shadcn-vanilla ./
 
       - name: Create Release
         id: create_release
