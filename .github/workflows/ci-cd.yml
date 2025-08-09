@@ -60,7 +60,7 @@ jobs:
           go-version: '1.24.6'
 
       - name: Build CLI binary
-        run: go build -o shadcn-vanilla-cli ./...
+        run: go build -o shadcn-vanilla ./cli
 
       - name: Create Release
         id: create_release
@@ -79,6 +79,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./shadcn-vanilla-cli
-          asset_name: shadcn-vanilla-cli
+          asset_path: ./shadcn-vanilla
+          asset_name: shadcn-vanilla
           asset_content_type: application/octet-stream
