@@ -1,0 +1,43 @@
+.btn {
+  @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0;
+}
+
+.btn[data-variant="default"] {
+  @apply bg-primary text-primary-foreground hover:bg-primary/90;
+}
+
+.btn[data-variant="destructive"] {
+  @apply bg-destructive text-destructive-foreground hover:bg-destructive/90;
+}
+
+.btn[data-variant="outline"] {
+  @apply border border-input bg-background hover:bg-accent hover:text-accent-foreground;
+}
+
+.btn[data-variant="secondary"] {
+  @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
+}
+
+.btn[data-variant="ghost"] {
+  @apply hover:bg-accent hover:text-accent-foreground;
+}
+
+.btn[data-variant="link"] {
+  @apply text-primary underline-offset-4 hover:underline;
+}
+
+.btn[data-size="default"] {
+  @apply h-10 px-4 py-2;
+}
+
+.btn[data-size="sm"] {
+  @apply h-9 rounded-md px-3;
+}
+
+.btn[data-size="lg"] {
+  @apply h-11 rounded-md px-8;
+}
+
+.btn[data-size="icon"] {
+  @apply h-10 w-10;
+}

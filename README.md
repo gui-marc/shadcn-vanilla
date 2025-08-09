@@ -3,10 +3,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Issues](https://img.shields.io/github/issues/gui-marc/shadcn-vanilla)](https://github.com/gui-marc/shadcn-vanilla/issues)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)  
-![Blade](https://img.shields.io/badge/Blade-Laravel-red)
-![Nunjucks](https://img.shields.io/badge/Nunjucks-yellow)
-![Go%20Templates](https://img.shields.io/badge/Go%20Templates-blue)
-![Go%20Templ](https://img.shields.io/badge/Go%20Templ-lightgrey)
 
 ---
 
@@ -15,7 +11,7 @@ It ships TailwindCSS + AlpineJS components that can be output in multiple templa
 
 ---
 
-## ✨ What is shadcn-vanilla?
+## What is shadcn-vanilla?
 
 The goal of shadcn-vanilla is to bring the flexibility and quality of shadcn/ui components to **non-React projects**.  
 Instead of relying on a single frontend stack, shadcn-vanilla:
@@ -27,16 +23,16 @@ Instead of relying on a single frontend stack, shadcn-vanilla:
 
 ---
 
-## ⚙️ How It Works
+## How It Works
 
 1. **Canonical Components**  
    Each component is written once using a neutral placeholder syntax.
 
 2. **Adapters**  
    Adapters transform the canonical version into different templating syntaxes:
-   - Blade (Laravel)
-   - Nunjucks
-   - Go Templates
+   - Blade (Laravel) *Future*
+   - Nunjucks *Future*
+   - Go Templates *Future*
    - Go Templ
 
 3. **CLI**  

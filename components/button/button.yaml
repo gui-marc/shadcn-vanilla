@@ -1,0 +1,20 @@
+name: button
+description: A button component
+default-as: button
+variants:
+  - name: variant
+    values:
+      - default
+      - destructive
+      - outline
+      - secondary
+      - ghost
+      - link
+    default: "default"
+  - name: size
+    values:
+      - default
+      - sm
+      - lg
+      - icon
+    default: "default"
