@@ -27,11 +27,11 @@ jobs:
     - name: Build binaries
       run: |
         mkdir -p dist
-        GOOS=linux GOARCH=amd64 go build -o dist/shadcn-vanilla ./cli
-        GOOS=linux GOARCH=arm64 go build -o dist/shadcn-vanilla-linux-arm64 ./cli
-        GOOS=darwin GOARCH=amd64 go build -o dist/shadcn-vanilla-darwin-amd64 ./cli
-        GOOS=darwin GOARCH=arm64 go build -o dist/shadcn-vanilla-darwin-arm64 ./cli
-        GOOS=windows GOARCH=amd64 go build -o dist/shadcn-vanilla.exe ./cli
+        GOOS=linux GOARCH=amd64 go build -o dist/shadcn-vanilla ./
+        GOOS=linux GOARCH=arm64 go build -o dist/shadcn-vanilla-linux-arm64 ./
+        GOOS=darwin GOARCH=amd64 go build -o dist/shadcn-vanilla-darwin-amd64 ./
+        GOOS=darwin GOARCH=arm64 go build -o dist/shadcn-vanilla-darwin-arm64 ./
+        GOOS=windows GOARCH=amd64 go build -o dist/shadcn-vanilla.exe ./
 
     - name: Create release
       id: create_release
