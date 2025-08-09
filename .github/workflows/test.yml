@@ -1,4 +1,4 @@
-name: CLI CI/CD
+name: CLI Tests
 
 on:
   push:
